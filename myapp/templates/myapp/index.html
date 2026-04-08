@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Bitcount+Prop+Double:wght@100..900&family=Bungee&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+    <div class="popup-container">
+        {% for message in messages %}
+        <div class="popup">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="bi bi-mortarboard-fill"></i> <span style="color: rgb(75, 129, 215); margin-left:5px;">Campus</span> Portal
+            </div>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#event">Events</a>
+                <a href="#announcement">Announcements</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'my_events' %}" class="login-btn">Dashboard</a>
+                <a href="{% url 'logout' %}" class="login-btn">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+                <a href="{% url 'register' %}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <section class="home" id="home">
+        <img src="{% static 'myapp/images/universitycampus.jpg' %}" class="bg-img" alt="campus">
+        <div class="home-card">
+            <h1>Your Campus, All in One Dashboard</h1>
+            <p>Track events, read announcements, and stay connected with everything happening across campus.</p>
+            <div class="home-btn">
+                <a href="#event" class="event-btn">Explore Events</a>
+                <a href="{% url 'login' %}" class="login-btn">Student Login</a>
+            </div>
+        </div>
+    </section>
+    <section class="services">
+        <h2 class="section-title">Campus Portal Services</h2>
+        <div class="service-container">
+            <div class="service-card">
+                <i class="bi bi-calendar-event"></i>
+                <h3>Campus Events</h3>
+                <p>Discover upcoming workshops, seminars, and activities.</p>
+            </div>
+            <div class="service-card">
+                <i class="bi bi-megaphone"></i>
+                <h3>Announcements</h3>
+                <p>Stay updated with important campus notices.</p>
+            </div>
+            <div class="service-card">
+                <i class="bi bi-tools"></i>
+                <h3>Student Support</h3>
+                <p>Submit complaints and track campus services.</p>
+            </div>
+        </div>
+    </section>
+    <section class="events" id="event">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="event-container">
+            <div class="event-card">
+                <div class="img">
+                    <img src="{% static 'myapp/images/hackathon.webp' %}" alt="hackathonimage">
+                </div>
+                <h3 style="color:blue">Hackathon 2026</h3>
+                <div class="event-info">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>March 30, 2026</span>
+                </div>
+                <div class="event-info">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>Computer Lab</span>
+                </div>
+                <div class="event-info deadline">
+                    <i class="bi bi-clock"></i>
+                    <span>Last Date:</span><span style="color:greenyellow"> March 29</span>
+                </div>
+                <a href="{% url 'eventregister' %}" class="register-btn2">
+                    Register
+                </a>
+            </div>
+            <div class="event-card">
+                <div class="img">
+                    <img src="{% static 'myapp/images/ai-workshop.webp' %}" alt="AI Workshop">
+                </div>
+                <h3 style="color:brown">AI Workshop</h3>
+                <div class="event-info">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>March 28, 2026</span>
+                </div>
+                <div class="event-info">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>Seminar Hall</span>
+                </div>
+                <div class="event-info deadline">
+                    <i class="bi bi-clock"></i>
+                    <span>Last Date:</span><span style="color:greenyellow"> March 27</span>
+                </div>
+                <a href="{% url 'eventregister' %}" class="register-btn2">
+                    Register
+                </a>
+            </div>
+            <div class="event-card">
+                <div class="img">
+                    <img src="{% static 'myapp/images/sports.jpg' %}" alt="Sports Day">
+                </div>
+                <h3 style="color:blueviolet">Sports Day</h3>
+                <div class="event-info">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>April 2, 2026</span>
+                </div>
+                <div class="event-info">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>College Ground</span>
+                </div>
+                <div class="event-info deadline">
+                    <i class="bi bi-clock"></i>
+                    <span>Last Date:</span><span style="color:greenyellow"> March 30</span>
+                </div>
+                <a href="{% url 'eventregister' %}" class="register-btn2">
+                    Register</a>
+            </div>
+        </div>
+    </section>
+    <section class="announcements" id="announcement">
+        <h2 class="section-title">Latest Announcements</h2>
+        <div class="announcement-container">
+            <div class="announcement-card">
+                <h3 style="color:#d72d1a;"><i class="bi bi-megaphone-fill"></i> Mid Semester Exam Notice</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 28 March 2026</p>
+                <p class="content">
+                    Mid semester exams will begin next week. Please check the timetable on the portal.
+                </p>
+            </div>
+            <div class="announcement-card">
+                <h3 style="color:#a0d811;"><i class="bi bi-book"></i> Library Timing Update</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 15 March 2026</p>
+                <p class="content">
+                    Library will remain open until 8 PM during examination week.
+                </p>
+            </div>
+            <div class="announcement-card">
+                <h3 style="color:gold;"><i class="bi bi-trophy"></i> Sports Event Registration</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 02 April 2026</p>
+                <p class="content">
+                    Sports day registration fee ₹200 per student. Register before the deadline.
+                </p>
+            </div>
+            <div class="announcement-card">
+                <h3 style="color:burlywood;"><i class="bi bi-cup-hot"></i> Food Stall Announcement</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 20 March 2026</p>
+                <p class="content">
+                    Special food stalls will be available during the cultural event near the main ground.
+                </p>
+            </div>
+            <div class="announcement-card">
+                <h3 style="color:#e27d2b;"><i class="bi bi-cpu"></i> AI Workshop</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 25 March 2026</p>
+                <p class="content">
+                    Workshop entry fee ₹100. Limited seats available for interested students.
+                </p>
+            </div>
+            <div class="announcement-card">
+                <h3 style="color:rgb(26, 170, 175)"><i class="bi bi-code-slash"></i> Hackathon Entry</h3>
+                <p class="date"><i class="bi bi-calendar-event"></i> 20 March 2026</p>
+                <p class="content">
+                    Hackathon entry fee ₹300. Spot registration is also available on the event day.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <h2 class="section-title">About Campus</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <img src="{% static 'myapp/images/campus5.jpg' %}" alt="campus image">
+            </div>
+            <div class="about-features">
+                <div class="feature">
+                    <i class="bi bi-mortarboard-fill" style="color:#f0f718;"></i>
+                    <h3>Quality Education</h3>
+                    <p>
+                        Industry-focused academic programs designed to prepare students
+                        for real-world challenges.
+                    </p>
+                </div>
+                <div class="feature">
+                    <i class="bi bi-cpu-fill" style="color:burlywood;"></i>
+                    <h3>Innovation Labs</h3>
+                    <p>
+                        Modern labs that encourage creativity, research, and
+                        hands-on learning experiences.
+                    </p>
+                </div>
+                <div class="feature">
+                    <i class="bi bi-trophy-fill" style="color:gold;"></i>
+                    <h3>Student Achievements</h3>
+                    <p>
+                        Our students excel in competitions, hackathons, and
+                        academic excellence.
+                    </p>
+                </div>
+                <div class="feature">
+                    <i class="bi bi-people-fill" style="color:#2562d1;"></i>
+                    <h3>Campus Community</h3>
+                    <p>
+                        A vibrant student community with clubs, events,
+                        and cultural activities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-info">
+            <div class="info">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p>Campus Administrative Office,<br> Main Block,
+                    ABC Engineering College, Chennai</p>
+            </div>
+            <div class="info">
+                <i class="bi bi-telephone-fill"></i>
+                <p>+91 98765 56789</p>
+            </div>
+            <div class="info">
+                <i class="bi bi-envelope-fill"></i>
+                <p>abccollege@gmail.com<br>campus@college.edu</p>
+            </div>
+        </div>
+        <form method="POST" action="{% url 'contact' %}" class="contact-form">
+            {% csrf_token %}
+            <label><i class="bi bi-person-fill"></i> Your Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <label><i class="bi bi-envelope-fill"></i> Your Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <label><i class="bi bi-calendar-event"></i> Batch Year</label>
+            <input type="number" name="batch_year" placeholder="2026" required>
+            <label><i class="bi bi-mortarboard-fill"></i> Department</label>
+            <select name="department" required>
+                <option>Select Department</option>
+                <option>AIML</option>
+                <option>IT</option>
+                <option>EEE</option>
+                <option>Computer Science</option>
+                <option>Mechanical</option>
+                <option>Electronics</option>
+                <option>Biomedical</option>
+            </select>
+            <label><i class="bi bi-question-circle-fill"></i> Message Type</label>
+            <select name="message_type" required>
+                <option value="">Select Type</option>
+                <option value="inquiry">Inquiry</option>
+                <option value="complaint">Complaint</option>
+            </select>
+            <label><i class="bi bi-chat-dots-fill"></i> Message</label>
+            <textarea name="message" placeholder="Write your message..." required></textarea>
+            <button type="submit">
+                <i class="bi bi-send-fill"></i> Send Message
+            </button>
+        </form>
+    </section>
+</body>
+</html>
