@@ -25,12 +25,17 @@
             <div class="logo">
                 <i class="bi bi-mortarboard-fill"></i> <span style="color: rgb(75, 129, 215); margin-left:5px;">Campus</span> Portal
             </div>
-            <div class="menu">
-                <a href="#home">Home</a>
-                <a href="#event">Events</a>
-                <a href="#announcement">Announcements</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu" id="navMenu">
+                <a href="#home" onclick="closeMenu()">Home</a>
+                <a href="#event" onclick="closeMenu()">Events</a>
+                <a href="#announcement" onclick="closeMenu()">Announcements</a>
+                <a href="#about" onclick="closeMenu()">About</a>
+                <a href="#contact" onclick="closeMenu()">Contact</a>
                 {% if user.is_authenticated %}
                 <a href="{% url 'my_events' %}" class="login-btn">Dashboard</a>
                 <a href="{% url 'logout' %}" class="login-btn">Logout</a>
@@ -41,6 +46,18 @@
             </div>
         </div>
     </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('open');
+        });
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('open');
+        }
+    </script>
     <section class="home" id="home">
         <img src="{% static 'myapp/images/universitycampus.jpg' %}" class="bg-img" alt="campus">
         <div class="home-card">
